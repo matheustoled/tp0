@@ -47,34 +47,25 @@ void desenhar_figura(int linha_inicial, int coluna_inicial, int altura_figura, i
             if (figura[i][j] == '*') {
                 quadro[linha_inicial+i][coluna_inicial+j] = '*';
             }
-            // else if (figura[i][j] == 'C') {
-            //     quadro[linha_inicial+i][coluna_inicial+j] = 'C';
-            // }
-            // else if (figura[i][j] == 'A') {
-            //     quadro[linha_inicial+i][coluna_inicial+j] = 'A';
-            // }
-            // else if (figura[i][j] == 'M') {
-            //     quadro[linha_inicial+i][coluna_inicial+j] = 'M';
-            // }
         }
     }
 }
 
 // Figuras
 void figura_asterisco() {
-    char fig[1][1] = { "*" };
+    char figura_asterisco[1][1] = { "*" };
     int linha_inicial, coluna_inicial;
     do {
         linha_inicial = rand() % (LINHAS - 2) + 1; // -2 evita que seja printado nas bordas do quadro (LINHAS - altura_figura - 1)
                                                    // +1 faz com que sempre inicie, pelo menos, a partir da primeira linha/coluna
         coluna_inicial = rand() % (COLUNAS - 2) + 1;
-    } while (!verificar_posicao(linha_inicial, coluna_inicial, 1, 1, fig)); // Se existir ja existir uma figura na posicao do quadro, randomiza novamente
+    } while (!verificar_posicao(linha_inicial, coluna_inicial, 1, 1, figura_asterisco)); // Se ja existir uma figura na posicao do quadro, randomiza novamente
                                                                             // Caso contrário, sai do loop e desenha a figura.
-    desenhar_figura(linha_inicial, coluna_inicial, 1, 1, fig);
+    desenhar_figura(linha_inicial, coluna_inicial, 1, 1, figura_asterisco);
 }
 
 void figura_soma() {
-    char fig[3][3] = {
+    char figura_soma[3][3] = {
         {' ', '*', ' '},
         {'*', '*', '*'},
         {' ', '*', ' '}
@@ -83,12 +74,12 @@ void figura_soma() {
     do {
         linha_inicial = rand() % (LINHAS - 4) + 1;
         coluna_inicial = rand() % (COLUNAS - 4) + 1;
-    } while (!verificar_posicao(linha_inicial, coluna_inicial, 3, 3, fig));
-    desenhar_figura(linha_inicial, coluna_inicial, 3, 3, fig);
+    } while (!verificar_posicao(linha_inicial, coluna_inicial, 3, 3, figura_soma));
+    desenhar_figura(linha_inicial, coluna_inicial, 3, 3, figura_soma);
 }
 
 void figura_x() {
-    char fig[3][3] = {
+    char figura_x[3][3] = {
         {'*', ' ', '*'},
         {' ', '*', ' '},
         {'*', ' ', '*'}
@@ -97,8 +88,8 @@ void figura_x() {
     do {
         linha_inicial = rand() % (LINHAS - 4) + 1;
         coluna_inicial = rand() % (COLUNAS - 4) + 1;
-    } while (!verificar_posicao(linha_inicial, coluna_inicial, 3, 3, fig));
-    desenhar_figura(linha_inicial, coluna_inicial, 3, 3, fig);
+    } while (!verificar_posicao(linha_inicial, coluna_inicial, 3, 3, figura_x));
+    desenhar_figura(linha_inicial, coluna_inicial, 3, 3, figura_x);
 }
 
 // Figuras Personalizadas
