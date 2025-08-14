@@ -185,12 +185,7 @@ int main() {
     printf("Digite a quantidade (<=0 para aleatorio): ");
     scanf("%d", &qnt);
 
-    if(tipo == 1){
-        if (qnt <= 0) qnt = rand() % 1404 + 1;
-        if (qnt > 1404) qnt = 1404;
-    }
-
-    else if(1 < tipo < 5){
+    if(0 < tipo < 5){
         if (qnt <= 0) qnt = rand() % 100 + 1;
         if (qnt > 100) qnt = 100;
     }
