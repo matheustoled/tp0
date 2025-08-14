@@ -47,15 +47,15 @@ void desenhar_figura(int linha_inicial, int coluna_inicial, int altura_figura, i
             if (figura[i][j] == '*') {
                 quadro[linha_inicial+i][coluna_inicial+j] = '*';
             }
-            else if (figura[i][j] == 'C') {
-                quadro[linha_inicial+i][coluna_inicial+j] = 'C';
-            }
-            else if (figura[i][j] == 'A') {
-                quadro[linha_inicial+i][coluna_inicial+j] = 'A';
-            }
-            else if (figura[i][j] == 'M') {
-                quadro[linha_inicial+i][coluna_inicial+j] = 'M';
-            }
+            // else if (figura[i][j] == 'C') {
+            //     quadro[linha_inicial+i][coluna_inicial+j] = 'C';
+            // }
+            // else if (figura[i][j] == 'A') {
+            //     quadro[linha_inicial+i][coluna_inicial+j] = 'A';
+            // }
+            // else if (figura[i][j] == 'M') {
+            //     quadro[linha_inicial+i][coluna_inicial+j] = 'M';
+            // }
         }
     }
 }
@@ -65,7 +65,8 @@ void figura_asterisco() {
     char fig[1][1] = { "*" };
     int linha_inicial, coluna_inicial;
     do {
-        linha_inicial = rand() % (LINHAS - 2) + 1;
+        linha_inicial = rand() % (LINHAS - 2) + 1; // -2 evita que seja printado nas bordas do quadro (LINHAS - altura_figura - 1)
+                                                   // +1 faz com que sempre inicie, pelo menos, a partir da primeira linha/coluna
         coluna_inicial = rand() % (COLUNAS - 2) + 1;
     } while (!verificar_posicao(linha_inicial, coluna_inicial, 1, 1, fig)); // Se existir ja existir uma figura na posicao do quadro, randomiza novamente
                                                                             // Caso contrário, sai do loop e desenha a figura.
@@ -100,54 +101,114 @@ void figura_x() {
     desenhar_figura(linha_inicial, coluna_inicial, 3, 3, fig);
 }
 
-void figura_personalizada() { // Escudo do galao da massa
-    char escudo[9][9] = {
-        {' ', ' ', ' ', ' ', '*', ' ', ' ', ' ', ' ',},
-        {' ', '*', '*', '*', '*', '*', '*', '*', ' ',},
-        {'*', ' ', 'C', ' ', 'A', ' ', 'M', ' ', '*',},
-        {'*', '*', '*', '*', '*', '*', '*', '*', '*',},
-        {'*', ' ', ' ', ' ', '*', ' ', ' ', ' ', '*',},
-        {'*', ' ', ' ', ' ', '*', ' ', ' ', ' ', '*',},
-        {' ', '*', ' ', ' ', '*', ' ', ' ', '*', ' ',},
-        {' ', ' ', '*', '*', '*', '*', '*', ' ', ' ',},
-        {' ', ' ', ' ', ' ', '*', ' ', ' ', ' ', ' ',} 
+// Figuras Personalizadas
+void estrela_diamante() {
+    char estrela_diamante[5][5] = {
+        {' ', ' ', '*', ' ', ' ',},
+        {' ', '*', '*', '*', ' ',},
+        {'*', '*', '*', '*', '*',},
+        {' ', '*', '*', '*', ' ',},
+        {' ', ' ', '*', ' ', ' ',},
     };
     int linha_inicial, coluna_inicial;
     do {
-        linha_inicial = rand() % (LINHAS - 10) + 1;
-        coluna_inicial = rand() % (COLUNAS - 10) + 1;
-    } while (!verificar_posicao(linha_inicial, coluna_inicial, 9, 9, escudo));
-    desenhar_figura(linha_inicial, coluna_inicial, 9, 9, escudo);
+        linha_inicial = rand() % (LINHAS - 6) + 1;
+        coluna_inicial = rand() % (COLUNAS - 6) + 1;
+    } while (!verificar_posicao(linha_inicial, coluna_inicial, 5, 5, estrela_diamante));
+    desenhar_figura(linha_inicial, coluna_inicial, 5, 5, estrela_diamante);
+}
+void estrela_x() {
+    char estrela_x[5][5] = {
+        {'*', ' ', ' ', ' ', '*'},
+        {' ', '*', ' ', '*', ' '},
+        {' ', ' ', '*', ' ', ' '},
+        {' ', '*', ' ', '*', ' '},
+        {'*', ' ', ' ', ' ', '*'}
+    };
+    int linha_inicial, coluna_inicial;
+    do {
+        linha_inicial = rand() % (LINHAS - 6) + 1;
+        coluna_inicial = rand() % (COLUNAS - 6) + 1;
+    } while (!verificar_posicao(linha_inicial, coluna_inicial, 5, 5, estrela_x));
+    desenhar_figura(linha_inicial, coluna_inicial, 5, 5, estrela_x);
+}
+void estrela_cruz() {
+    char estrela_cruz[5][5] = {
+        {' ', ' ', '*', ' ', ' '},
+        {' ', ' ', '*', ' ', ' '},
+        {'*', '*', '*', '*', '*'},
+        {' ', ' ', '*', ' ', ' '},
+        {' ', ' ', '*', ' ', ' '}
+    };
+    int linha_inicial, coluna_inicial;
+    do {
+        linha_inicial = rand() % (LINHAS - 6) + 1;
+        coluna_inicial = rand() % (COLUNAS - 6) + 1;
+    } while (!verificar_posicao(linha_inicial, coluna_inicial, 5, 5, estrela_cruz));
+    desenhar_figura(linha_inicial, coluna_inicial, 5, 5, estrela_cruz);
+}
+void estrela_belem() {
+    char estrela_belem[5][5] = {
+        {'*', ' ', '*', ' ', '*'},
+        {' ', '*', '*', '*', ' '},
+        {'*', '*', '*', '*', '*'},
+        {' ', '*', '*', '*', ' '},
+        {'*', ' ', '*', ' ', '*'}
+    };
+    int linha_inicial, coluna_inicial;
+    do {
+        linha_inicial = rand() % (LINHAS - 6) + 1;
+        coluna_inicial = rand() % (COLUNAS - 6) + 1;
+    } while (!verificar_posicao(linha_inicial, coluna_inicial, 5, 5, estrela_belem));
+    desenhar_figura(linha_inicial, coluna_inicial, 5, 5, estrela_belem);
 }
 
 int main() {
     srand(time(NULL));
-    int tipo, qtd;
+    int tipo, qnt;
 
     printf("PROGRAMA GERADOR DE OBRA DE ARTE:\n");
     printf("=================================\n");
-    printf("Escolha o tipo de figura basica a ser usada para criar a obra:\n");
+    printf("Figuras basicas a serem usadas para criar a obra:\n");
     printf("1 - asterisco simples\n");
     printf("2 - simbolo de soma\n");
     printf("3 - letra X\n");
     printf("4 - figuras aleatorias\n");
-    printf("5 - figura personalizada\n");
+    printf("Figuras personalizadas a serem usadas para criar a obra:\n");
+    printf("5 - estrela diamante\n");
+    printf("6 - estrela X\n");
+    printf("7 - estrela cruz\n");
+    printf("8 - estrela de Belem\n");
+    printf("9 - figuras personalizadas aleatorias (Variadas - Quadro: Ceu Estrelado)\n");
     printf("Digite o tipo: ");
     scanf("%d", &tipo);
     printf("Digite a quantidade (<=0 para aleatorio): ");
-    scanf("%d", &qtd);
+    scanf("%d", &qnt);
 
-    if (qtd <= 0) qtd = rand() % 100 + 1;
-    if (qtd > 100) qtd = 100;
+    if(tipo == 1){
+        if (qnt <= 0) qnt = rand() % 1404 + 1;
+        if (qnt > 1404) qnt = 1404;
+    }
+
+    else if(1 < tipo < 5){
+        if (qnt <= 0) qnt = rand() % 100 + 1;
+        if (qnt > 100) qnt = 100;
+    }
+
+    else if(5 <= tipo < 10){
+        if (qnt <= 0) qnt = rand() % 52 + 1;
+        if (qnt > 52) qnt = 52;
+    }
 
     inicializar_quadro();
-
-    for (int i = 0; i < qtd; i++) {
+    
+    for (int i = 0; i < qnt; i++) {
         int escolha = tipo;
-        if (tipo == 4) escolha = rand() % 3 + 1;
+        if (tipo == 4) escolha = rand() % (3) + 1;
+        if (tipo == 9) escolha = rand() % (4) + 5;
 
         switch (escolha) {
-            case 1: 
+            case 1:
                 figura_asterisco(); 
                 break;
             case 2: 
@@ -156,8 +217,17 @@ int main() {
             case 3: 
                 figura_x(); 
                 break;
-            case 5: 
-                figura_personalizada(); 
+            case 5:
+                estrela_diamante();
+                break;
+            case 6:
+                estrela_x();
+                break;
+            case 7:
+                estrela_cruz();
+                break;
+            case 8:
+                estrela_belem();
                 break;
         }
     }
